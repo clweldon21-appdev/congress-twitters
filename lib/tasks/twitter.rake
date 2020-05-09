@@ -14,13 +14,23 @@ task(:scrape) do
     p "Visting #{contact_url}..."
     browser.goto(contact_url)
     
-    senator_page_links = browser.css("a")
+    senator_page_links = browser.css('[href*="twitter.com"]')
 
-    senator_page_links.each do |sp_link|
-      if sp_link.text.strip == "Twitter"
-        p sp_link.attribute(:href)
+    senator_handles= Array.new
+
+    senator_page_links.each do |link|
+      if link.attribute(:href).exclude?("/status/")
+      senator_handles.push(link.attribute(:href))
       end
     end
+
+   
+
+    #senator_page_links.each do |sp_link|
+      #if sp_link.text.strip == "Twitter"
+       # p sp_link.attribute(:href)
+     # end
+    #end
    
   #links.each_with_index do |link, index|
     #if index.odd?
