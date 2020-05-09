@@ -15,6 +15,12 @@ task(:scrape) do
     browser.goto(contact_url)
     
     senator_page_links = browser.css("a")
+
+    senator_page_links.each do |sp_link|
+      if sp_link.text.strip == "Twitter"
+        p sp_link.attribute(:href)
+      end
+    end
    
   #links.each_with_index do |link, index|
     #if index.odd?
